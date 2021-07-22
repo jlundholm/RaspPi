@@ -1,0 +1,24 @@
+#Magnetic Hall Module
+#Import LED Module from gpiozero library
+from gpiozero import LED
+#Import DigitalInputDevice Module from gpiozero library
+from gpiozero import DigitalInputDevice
+#A Module for sleeping the Pi
+from time import sleep
+if __name__ == '__main__':
+    #Activating the function that controls the Sensor connected to pin 17
+    sensor = DigitalInputDevice(17)
+    #Activating function that controls the red LED connected to pin 12
+    Led_Red = LED(12)
+    try:
+        while True:
+        Led_Red.on()
+        sensor.wait_for_active()
+        print("Magnet Detected")
+        sensor.wait_for_inactive()
+        Led_red.toggle()
+        print("Not detected")
+    except KeyboardInterrupt:
+           print("Cleaning up")
+           io.cleanup()
+
